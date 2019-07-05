@@ -8,7 +8,7 @@ exports.up = function(knex) {
       table.integer('calories');
       table.string('recipeUrl');
       table.integer('numIngredients');
-      table.string('ingredientsString');
+      table.text('ingredientsString');
 
       table.timestamps(true, true);
     })
