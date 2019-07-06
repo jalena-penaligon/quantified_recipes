@@ -12,4 +12,14 @@ router.get("/", function (req, res, next) {
     });
 })
 
+router.get("/calorie_count", function (req, res, next) {
+  knex('recipes').whereBetween('caloriesPerServing', [req.query.from, req.query.to])
+    .then((recipes) => {
+      res.status(200).json({results: recipes.length, recipes: recipes});
+    })
+    .catch((error) => {
+      res.status(500).json({ error });
+    });
+})
+
 module.exports = router;
