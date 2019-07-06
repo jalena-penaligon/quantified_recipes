@@ -3,13 +3,28 @@ var router = express.Router();
 var knex = require('../../../db/knex.js');
 
 router.get("/", function (req, res, next) {
-  knex('recipes').orderBy(req.query.columnName, req.query.order)
-  .then((recipes) => {
-    res.status(200).json(recipes);
-  })
-  .catch((error) => {
-    res.status(500).json({ error });
-  });
+  if (req.query.order){
+    var sortOrder = req.query.order
+  } else {
+    var sortOrder = 'asc'
+  }
+  if (req.query.columnName){
+    knex('recipes').orderBy(req.query.columnName, sortOrder)
+    .then((recipes) => {
+      res.status(200).json(recipes);
+    })
+    .catch((error) => {
+      res.status(500).json({ error });
+    });
+  } else {
+    knex('recipes').select()
+    .then((recipes) => {
+      res.status(200).json(recipes);
+    })
+    .catch((error) => {
+      res.status(500).json({ error });
+    });
+  }
 })
 
 router.get("/food_search", function (req, res, next) {
