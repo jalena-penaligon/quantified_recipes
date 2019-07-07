@@ -34,8 +34,18 @@ describe('GET /recipes', () => {
     const res = await request(app).get('/api/v1/recipes?columnName=calories')
     const recipe = res.body[0].recipeName
 
-
     expect(recipe).toEqual(expectedRecipe)
+  })
+
+  it('should return all the recipes if column name is invalid', async () => {
+
+    const expectedRecipes = await knex('recipes').select()
+    .then(recipes => {return recipes.length})
+
+    const res = await request(app).get('/api/v1/recipes?columnName=calorie')
+    const recipes = res.body.length
+
+    expect(recipes).toEqual(expectedRecipes)
   })
 })
 
