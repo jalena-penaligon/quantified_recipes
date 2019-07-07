@@ -103,3 +103,47 @@ describe('GET /recipes/ingredient_search', () => {
     expect(recipes).toEqual(expectedRecipes)
   })
 })
+
+describe('GET /recipes/calorie_count', () => {
+  it('can return recipes filtered and sorted by number of calories', async () => {
+
+    const expectedRecipes = await knex('recipes')
+    .whereBetween('caloriesPerServing', [300, 600])
+    .orderBy('caloriesPerServing')
+    .then(recipes => {return recipes.length})
+
+    const res = await request(app).get('/api/v1/recipes/calorie_count?from=300&to=600')
+    const recipes = res.body.recipes.length
+
+
+    expect(recipes).toEqual(expectedRecipes)
+  })
+
+  it('can return an error message if no recipes in range', async () => {
+
+    const expectedRecipes = 'No recipes within that calorie range!'
+
+    const res = await request(app).get('/api/v1/recipes/calorie_count?from=200&to=300')
+    const recipes = res.body
+
+
+    expect(recipes).toEqual(expectedRecipes)
+  })
+})
+
+describe('GET /recipes/average_calories', () => {
+  it('can return recipes filtered and sorted by number of calories', async () => {
+
+    const expectedRecipes = await knex.select('foodType')
+    .from('recipes')
+    .avg('caloriesPerServing as average_calories')
+    .groupBy('foodType')
+    .then(averages => {return averages})
+
+    const res = await request(app).get('/api/v1/recipes/average_calories?q=foodType')
+    const recipes = res.body
+
+
+    expect(recipes).toEqual(expectedRecipes)
+  })
+})
