@@ -75,7 +75,7 @@ router.get("/food_search", function (req, res, next) {
 })
 
 router.get("/average_calories", function (req, res, next) {
-  knex.select(`${req.query.q}`).from('recipes').avg('caloriesPerServing as average_calories').groupBy(`${req.query.q}`)
+  knex.select(req.query.q).from('recipes').avg('caloriesPerServing as average_calories').groupBy(req.query.q)
   .then(averages => {
     res.status(200).json(averages);
   })
