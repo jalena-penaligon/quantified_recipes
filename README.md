@@ -3,6 +3,10 @@ Introduction: This is the paired project from Mod 4 at Turing School of Software
 Github Projects board is available at https://github.com/Matt-Weiss/quantified-self/projects/1 in conjunction with the Quantified Self repository.
 
 Initial Setup:
+Clone repository
+Run npm install
+npx knex migrate:latest
+
 
 How to Use:
 
