@@ -2,6 +2,11 @@ var express = require('express');
 var router = express.Router();
 var knex = require('../../../db/knex.js');
 
+var roundAverages = function(food) {
+  var roundedFood = {foodType: food.foodType, average_calories: Math.round(food.average_calories)}
+  return roundedFood
+}
+
 router.get("/", function (req, res, next) {
   if (req.query.order == 'desc'){
     var sortOrder = 'desc'
@@ -77,11 +82,14 @@ router.get("/food_search", function (req, res, next) {
 router.get("/average_calories", function (req, res, next) {
   knex.select(req.query.q).from('recipes').avg('caloriesPerServing as average_calories').groupBy(req.query.q)
   .then(averages => {
-    res.status(200).json(averages);
+    return Promise.all(averages.map(roundAverages))
   })
-  .catch((error) => {
-    res.status(500).json({ error });
-  });
+    .then(averages => {
+      res.status(200).json(averages);
+    })
+    .catch((error) => {
+      res.status(500).json({ error });
+    });
 })
 
 module.exports = router;
