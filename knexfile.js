@@ -15,20 +15,15 @@ module.exports = {
   },
 
   production: {
-    client: 'postgresql',
-    connection: {
-      database: 'recipes',
-      user:     'username',
-      password: 'password'
+        client: 'pg',
+        connection: process.env.DATABASE_URL,
+        migrations: {
+          directory: './db/migrations'
+        },
+        seeds: {
+            directory: './db/seeds/dev',
+        },
     },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
-  },
 
   test: {
     client: 'pg',
