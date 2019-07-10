@@ -44,7 +44,7 @@ Recipes table has the following columns:
 ### Endpoints
 #### GET api/v1/recipes
 Sample Response:
-
+```js
 Status: 200
 [
   {
@@ -74,10 +74,11 @@ Status: 200
     "caloriesPerServing": 596
   }
 ]
+```
 
 #### GET api/v1/recipes/calorie_count?from='NUM'&to='NUM'
 Sample Response:
-
+```js
 {
   "results": 2,
   "recipes": [
@@ -109,10 +110,12 @@ Sample Response:
   }
 ]
 }
+```
 
 #### GET api/v1/recipes/ingredient_search?from='NUM'&to='NUM'
 Sample Response:
 
+```js
 {
   "results": 3,
   "recipes": [
@@ -128,11 +131,13 @@ Sample Response:
       "updated_at": "2019-07-07T13:40:43.460Z",
       "yield": "6",
       "caloriesPerServing": 601
-    } ...
+    }
+}
+```
 
 #### GET api/v1/recipes/food_search?foodType='FOOD'
 Sample Response:
-
+```js
 [
   {
     "id": 1,
@@ -148,10 +153,10 @@ Sample Response:
     "caloriesPerServing": 661
   }...
 ]
-
+```
 #### GET api/v1/recipes/average_calories?q=foodType
 Sample Response:
-
+```js
 [
   {
     "foodType": "chicken",
@@ -166,3 +171,4 @@ Sample Response:
     "average_calories": 640
   }
 ]
+```
