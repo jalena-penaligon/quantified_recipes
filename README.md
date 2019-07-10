@@ -43,7 +43,8 @@ Recipes table has the following columns:
 
 ### Endpoints
 #### GET api/v1/recipes
-Sample Response
+Sample Response:
+
 Status: 200
 [
   {
@@ -75,7 +76,8 @@ Status: 200
 ]
 
 #### GET api/v1/recipes/calorie_count?from='NUM'&to='NUM'
-Sample Response
+Sample Response:
+
 {
   "results": 2,
   "recipes": [
@@ -109,6 +111,8 @@ Sample Response
 }
 
 #### GET api/v1/recipes/ingredient_search?from='NUM'&to='NUM'
+Sample Response:
+
 {
   "results": 3,
   "recipes": [
@@ -127,6 +131,7 @@ Sample Response
     } ...
 
 #### GET api/v1/recipes/food_search?foodType='FOOD'
+Sample Response:
 
 [
   {
@@ -145,6 +150,8 @@ Sample Response
 ]
 
 #### GET api/v1/recipes/average_calories?q=foodType
+Sample Response:
+
 [
   {
     "foodType": "chicken",
